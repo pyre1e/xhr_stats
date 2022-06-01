@@ -1,0 +1,29 @@
+* {
+    font-family: Roboto !important;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+    margin: auto
+}
+
+.request-form {
+    display: grid;
+    grid-template-rows: 40px 1fr;
+}
+
+.request-form-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 50px;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 5px;
+}
+
+input, select, button {
+    height: 30px;
+}
+
+#body {
+    resize: none;
+}

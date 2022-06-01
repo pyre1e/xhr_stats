@@ -1,5 +1,20 @@
-<script src="/index.js" type="module"></script>
+<head>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/index.js" type="module"></script>
+</head>
 
 <body>
-    <button id="send">Send</button>
+    <div class="container">
+        <div class="request-form">
+            <div class="request-form-row">
+                <input id="url" type="text" value="/stub.json" placeholder="https://">
+                <select id="method">
+                    <option value="GET" selected>GET</option>
+                    <option value="POST">POST</option>
+                </select>
+                <button id="send">Send</button>
+            </div>
+            <textarea id="body" placeholder="body" disabled rows="10"></textarea>
+        </div>
+    </div>
 </body>

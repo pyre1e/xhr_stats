@@ -1,20 +1,33 @@
 const XMLHttpRequestProxy = function(...args) 
 {
     const context = this;
+    const xhr = new (window.XMLHttpRequestOriginal || window.XMLHttpRequest)(...args);
 
-    return new Proxy(new window.XMLHttpRequest(...args), 
+    context.__xhr__ = xhr;
+
+    return new Proxy(xhr, 
     {
         get(target, name) 
         {
             if (typeof target[name] !== "function") {
                 return target[name]
             }
-
-            if (!context.__proto__.hasOwnProperty(name)) {
+            
+            if (!context.hasOwnProperty(name)) {
                 return target[name].bind(target)
             }
+            
+            return context[name].bind(context)
+        },
+        set(target, property, value, receiver)
+        {
+            if (typeof value !== "function") {
+                return Reflect.set(target, property, value, receiver)
+            }
 
-            return context.__proto__[name].bind(target)
+            context[property] = value;
+
+            return true
         }
     })
 }
